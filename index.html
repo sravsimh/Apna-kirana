@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna Kirana - Join Waitlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .description {
+            margin-bottom: 20px;
+        }
+
+        .waitlist-form {
+            margin-top: 20px;
+        }
+
+        input[type="email"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .waitlist-count {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Join the Apna Kirana Waitlist</h1>
+        <p class="description">
+            This is a form to register for the waitlist for the app called <strong>"Apna Kirana"</strong>.
+            We are here to disrupt the Quick Commerce category by creating a <strong>cost and time-efficient delivery
+                system</strong>,
+            specifically designed for the <strong>price-sensitive Indian market</strong>.
+        </p>
+
+        <p class="description">
+            Imagine getting <strong>groceries delivered for free</strong> from the Kirana stores you know and trust,
+            all in <strong>under 30 minutes</strong>. Sounds amazing, right?!
+        </p>
+
+        <p class="description">
+            Join the <strong>new wave of quick commerce</strong> by signing up for our waitlist and help bring this
+            vision to life sooner!
+            All you need to do is just join the list — <strong>that's it!</strong>
+        </p>
+
+        <p class="description">
+            <strong>Toh chaliye shuru karte hain XD XD</strong>
+        </p>
+
+
+        <form id="waitlist-form"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdrP5imy36TMleqCJwvOzAMMKVcq-9sLYSVbM5okjihYMqoDQ/formResponse"
+            method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+            <input type="email" name="entry.1518365185" placeholder="Enter your email" required>
+            <input type="submit" value="Join Waitlist">
+        </form>
+
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+        <div class="waitlist-count">
+            Current waitlist count: <span id="count">Loading...</span>
+        </div>
+    </div>
+
+    <script>
+        var submitted = false;
+        // Google Sheets URL for counting rows (Waitlist count)
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjr2rg-ICA6BgGbgIAFTEXTwHSnYgfKJKBPmkhfJaQFVzsu1iz42Gipt_n0xBLvD2DM-xEyfhuabv_/pub?gid=525880820&single=true&output=csv';
+
+        // Fetch the number of submissions (rows)
+        function updateWaitlistCount() {
+            fetch(sheetUrl)
+                .then(response => response.text())
+                .then(data => {
+                    // Convert the CSV to an array and get the length
+                    const rows = data.split("\n").length - 1; // Subtract header row
+                    document.getElementById('count').innerText = rows;
+                })
+                .catch(error => {
+                    console.error('Error fetching waitlist count:', error);
+                    document.getElementById('count').innerText = 'Error';
+                });
+        }
+
+        // Update the waitlist count on page load
+        window.onload = updateWaitlistCount;
+
+        // Optionally update the count when the form is submitted
+        document.getElementById('waitlist-form').addEventListener('submit', function () {
+            setTimeout(updateWaitlistCount, 2000); // Wait 2 seconds for the form to submit
+        });
+    </script>
+</body>
+
+</html>
