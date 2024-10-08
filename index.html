@@ -7,20 +7,30 @@
     <title>Apna Kirana - Join Waitlist</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            text-align: center;
-            padding: 50px;
+            background-image: url('bg.png');
+            /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
 
         .container {
             max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
+            width: 100%;
             padding: 20px;
+            background-color: rgb(255 255 255 / 0%);
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 16px 9px 20px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(23px);
         }
+
 
         h1 {
             color: #333;
@@ -35,17 +45,17 @@
         }
 
         input[type="email"] {
-            width: 80%;
+            width: 50%;
             padding: 10px;
             margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            border-radius: 25px;
+            border: 1px solid #f5d714;
         }
 
         input[type="submit"] {
             padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
+            background-color: #f5d714;
+            color: black;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -58,7 +68,7 @@
         .waitlist-count {
             margin-top: 20px;
             font-size: 18px;
-            color: #555;
+            color: #000000;
         }
     </style>
 </head>
@@ -100,8 +110,8 @@
 
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-        <div class="waitlist-count">
-            Current waitlist count: <span id="count">Loading...</span>
+        <div class="waitlist-count" style="font-size: xx-large;">
+            <span id="count" style="color: #f5d714;">Loading...</span> people want to use are app!!!
         </div>
     </div>
 
