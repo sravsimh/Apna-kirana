@@ -23,7 +23,6 @@
             font-family: "Forum", serif;
         }
 
-
         .container {
             max-width: 600px;
             width: 70%;
@@ -32,9 +31,7 @@
             border-radius: 8px;
             box-shadow: 16px 9px 20px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            /* backdrop-filter: blur(23px); */
         }
-
 
         h1 {
             color: #333;
@@ -75,6 +72,13 @@
             font-size: 18px;
             color: #000000;
         }
+
+        .thank-you-message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #28a745;
+            display: none;
+        }
     </style>
 </head>
 
@@ -86,25 +90,19 @@
         </p>
         <p>
             We are here to disrupt the Quick Commerce category by creating a <strong>cost and time-efficient delivery
-                system</strong>,
-            specifically designed for the <strong>price-sensitive Indian market</strong>.
+                system</strong>, specifically designed for the <strong>price-sensitive Indian market</strong>.
         </p>
-
         <p class="description">
-            Imagine getting <strong>groceries delivered for free</strong> from the Kirana stores you know and trust,
-            all in <strong>under 30 minutes</strong>. Sounds amazing, right?!
+            Imagine getting <strong>groceries delivered for free</strong> from the Kirana stores you know and trust, all
+            in <strong>under 30 minutes</strong>. Sounds amazing, right?!
         </p>
-
         <p class="description">
             Join the <strong>new wave of quick commerce</strong> by signing up for our waitlist and help bring this
-            vision to life sooner!
-            All you need to do is just join the list — <strong>that's it!</strong>
+            vision to life sooner! All you need to do is just join the list — <strong>that's it!</strong>
         </p>
-
         <p class="description">
             <strong>Toh chaliye shuru karte hain!!</strong>
         </p>
-
 
         <form id="waitlist-form" action="..." method="POST" target="hidden_iframe" onsubmit="return validateForm()">
             <input type="email" name="entry.1518365185" placeholder="Enter your email" required>
@@ -113,8 +111,11 @@
         </form>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+        <div class="thank-you-message">
+            Thank you for joining the waitlist! You will hear from us soon.
+        </div>
 
         <div class="waitlist-count" style="font-size: xx-large;">
             <span id="count" style="color: #f5d714;">Loading...</span> people want to use our app!!!
@@ -131,7 +132,12 @@
             return true;
         }
 
-        var submitted = false;
+        // Function to hide form and show thank you message
+        function showThankYouMessage() {
+            document.getElementById('waitlist-form').style.display = 'none';
+            document.querySelector('.thank-you-message').style.display = 'block';
+        }
+
         // Google Sheets URL for counting rows (Waitlist count)
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjr2rg-ICA6BgGbgIAFTEXTwHSnYgfKJKBPmkhfJaQFVzsu1iz42Gipt_n0xBLvD2DM-xEyfhuabv_/pub?gid=525880820&single=true&output=csv';
 
@@ -140,7 +146,6 @@
             fetch(sheetUrl)
                 .then(response => response.text())
                 .then(data => {
-                    // Convert the CSV to an array and get the length
                     const rows = data.split("\n").length - 1; // Subtract header row
                     document.getElementById('count').innerText = rows;
                 })
@@ -153,9 +158,13 @@
         // Update the waitlist count on page load
         window.onload = updateWaitlistCount;
 
-        // Optionally update the count when the form is submitted
-        document.getElementById('waitlist-form').addEventListener('submit', function () {
-            setTimeout(updateWaitlistCount, 2000); // Wait 2 seconds for the form to submit
+        // Handle form submission
+        document.getElementById('waitlist-form').addEventListener('submit', function (event) {
+            setTimeout(function () {
+                // Show thank you message and reload the count after submission
+                showThankYouMessage();
+                updateWaitlistCount();
+            }, 2000); // Wait 2 seconds for the form to submit
         });
     </script>
 </body>
