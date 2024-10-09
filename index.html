@@ -106,12 +106,13 @@
         </p>
 
 
-        <form id="waitlist-form"
-            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdrP5imy36TMleqCJwvOzAMMKVcq-9sLYSVbM5okjihYMqoDQ/formResponse"
-            method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+        <form id="waitlist-form" action="..." method="POST" target="hidden_iframe" onsubmit="return validateForm()">
             <input type="email" name="entry.1518365185" placeholder="Enter your email" required>
+            <div class="g-recaptcha" data-sitekey="6LcdFlwqAAAAACSIsGVDvZw35ArW0zILKLrIOgSj"></div>
             <input type="submit" value="Join Waitlist">
         </form>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
