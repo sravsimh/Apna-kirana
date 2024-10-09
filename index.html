@@ -122,6 +122,15 @@
     </div>
 
     <script>
+        function validateForm() {
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                alert("Please verify you are not a robot.");
+                return false;
+            }
+            return true;
+        }
+
         var submitted = false;
         // Google Sheets URL for counting rows (Waitlist count)
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjr2rg-ICA6BgGbgIAFTEXTwHSnYgfKJKBPmkhfJaQFVzsu1iz42Gipt_n0xBLvD2DM-xEyfhuabv_/pub?gid=525880820&single=true&output=csv';
