@@ -105,13 +105,9 @@
             <strong>Toh chaliye shuru karte hain!!</strong>
         </p>
 
-        <p class="description">
-            <strong>Site has been taken down due to excess traffic</strong>
-        </p>
 
-
-        <!-- <form id="waitlist-form"
-            action=""
+        <form id="waitlist-form"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdrP5imy36TMleqCJwvOzAMMKVcq-9sLYSVbM5okjihYMqoDQ/formResponse"
             method="POST" target="hidden_iframe" onsubmit="submitted=true;">
             <input type="email" name="entry.1518365185" placeholder="Enter your email" required>
             <input type="submit" value="Join Waitlist">
@@ -121,10 +117,37 @@
 
         <div class="waitlist-count" style="font-size: xx-large;">
             <span id="count" style="color: #f5d714;">Loading...</span> people want to use our app!!!
-        </div> -->
+        </div>
     </div>
 
+    <script>
+        var submitted = false;
+        // Google Sheets URL for counting rows (Waitlist count)
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjr2rg-ICA6BgGbgIAFTEXTwHSnYgfKJKBPmkhfJaQFVzsu1iz42Gipt_n0xBLvD2DM-xEyfhuabv_/pub?gid=525880820&single=true&output=csv';
 
+        // Fetch the number of submissions (rows)
+        function updateWaitlistCount() {
+            fetch(sheetUrl)
+                .then(response => response.text())
+                .then(data => {
+                    // Convert the CSV to an array and get the length
+                    const rows = data.split("\n").length - 1; // Subtract header row
+                    document.getElementById('count').innerText = rows;
+                })
+                .catch(error => {
+                    console.error('Error fetching waitlist count:', error);
+                    document.getElementById('count').innerText = 'Error';
+                });
+        }
+
+        // Update the waitlist count on page load
+        window.onload = updateWaitlistCount;
+
+        // Optionally update the count when the form is submitted
+        document.getElementById('waitlist-form').addEventListener('submit', function () {
+            setTimeout(updateWaitlistCount, 2000); // Wait 2 seconds for the form to submit
+        });
+    </script>
 </body>
 
 </html>
